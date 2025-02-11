@@ -1,0 +1,38 @@
+:root{
+    --back-ground: rgb(24, 15, 53);
+    --back-ground-hover: rgb(39, 31, 68);
+    --fore-ground: white;
+}
+
+body{
+    background-color: var(--back-ground);
+    color: var(--fore-ground);
+}
+
+nav ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.logo{
+    font-weight: bolder;
+    font-style: italic;
+    font-size: 3rem;
+    color: white;
+}
+
+.logo:hover{
+    color: white;
+}
+
+.nav-link{
+    color: var(--fore-ground);
+    font-size: larger;
+}
+
+.nav-link:hover, .nav-item:hover{
+    background-color: var(--back-ground-hover);
+    border-radius: 10px;
+}
