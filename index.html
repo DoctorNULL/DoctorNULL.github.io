@@ -20,7 +20,9 @@
     --text-dim:#8A93A0;
     --line:#2A3140;
 
-    --ai:#E8A33D;      /* AI / Computer Vision — lens & light */
+    --ai:#E8A33D;      /* Computer Vision — lens & light */
+    --aieng:#4C8BF5;   /* AI Engineer — systems & agents */
+    --ds:#4CAF7D;      /* Data Science — signal in the noise */
     --software:#3EC6B3;/* Software Engineering — signal/teal */
     --games:#8C7AE6;   /* Game Development — violet */
     --teaching:#E0637D;/* Teaching — rose */
@@ -211,7 +213,7 @@
   /* ---------- DOMAIN SELECTOR ---------- */
   .lens-grid{
     display:grid;
-    grid-template-columns:repeat(4, 1fr);
+    grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
     gap:12px;
     margin-bottom:32px;
   }
@@ -330,39 +332,64 @@
   .exp-bullets li::marker{ color:var(--card-color, var(--accent)); }
 
   /* ---------- PROJECTS ---------- */
-  .project-grid{
-    display:grid;
-    grid-template-columns:repeat(2, 1fr);
-    gap:16px;
+  .project-group{ margin-bottom:36px; }
+  .project-group:last-child{ margin-bottom:0; }
+  .project-group-title{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--group-color, var(--text-dim));
+    margin:0 0 14px;
+    display:flex;
+    align-items:center;
+    gap:8px;
   }
-  @media (max-width:720px){ .project-grid{ grid-template-columns:1fr; } }
-  .project-card{
-    background:var(--bg-elevated);
-    border:1px solid var(--line);
-    border-top:3px solid var(--card-color, var(--accent));
-    border-radius:10px;
-    padding:22px 24px;
+  .project-group-title .dot{
+    width:8px; height:8px; border-radius:50%;
+    background:var(--group-color, var(--text-dim));
+    display:inline-block;
   }
-  .project-card-head{
+  .project-list{ display:flex; flex-direction:column; }
+  .project-item{
+    padding:14px 0;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    gap:14px;
+    transition:opacity .3s ease;
+  }
+  .project-item:last-child{ border-bottom:none; }
+  .project-item.dimmed{ opacity:0.28; }
+  .project-item .item-dot{
+    width:7px; height:7px; border-radius:50%;
+    margin-top:8px;
+    flex-shrink:0;
+    background:var(--group-color, var(--accent));
+  }
+  .project-item .project-body{ flex:1; min-width:0; }
+  .project-title-row{
     display:flex;
     justify-content:space-between;
     align-items:baseline;
     gap:12px;
-    margin-bottom:8px;
+    flex-wrap:wrap;
   }
-  .project-card h3{
+  .project-title{
     font-family:var(--font-display);
-    font-size:1.02rem;
-    margin:0;
     font-weight:600;
+    font-size:0.98rem;
   }
-  .project-card .years{
+  .project-year{
     font-family:var(--font-mono);
-    font-size:0.75rem;
+    font-size:0.72rem;
     color:var(--text-dim);
     white-space:nowrap;
   }
-  .project-card p{ margin:0; color:var(--text-dim); font-size:0.92rem; }
+  .project-desc{
+    color:var(--text-dim);
+    font-size:0.9rem;
+    margin:4px 0 0;
+  }
 
   .stat-row{
     display:flex;
@@ -494,7 +521,9 @@
     </div>
     <div class="lens-grid reveal">
       <button class="lens-btn" data-domain="all" style="--dot-color:var(--text-dim)" aria-pressed="true"><span class="dot"></span>All disciplines</button>
-      <button class="lens-btn" data-domain="ai" style="--dot-color:var(--ai)" aria-pressed="false"><span class="dot"></span>AI &amp; Computer Vision</button>
+      <button class="lens-btn" data-domain="cv" style="--dot-color:var(--ai)" aria-pressed="false"><span class="dot"></span>Computer Vision</button>
+      <button class="lens-btn" data-domain="aieng" style="--dot-color:var(--aieng)" aria-pressed="false"><span class="dot"></span>AI Engineer</button>
+      <button class="lens-btn" data-domain="ds" style="--dot-color:var(--ds)" aria-pressed="false"><span class="dot"></span>Data Science</button>
       <button class="lens-btn" data-domain="software" style="--dot-color:var(--software)" aria-pressed="false"><span class="dot"></span>Software Engineering</button>
       <button class="lens-btn" data-domain="games" style="--dot-color:var(--games)" aria-pressed="false"><span class="dot"></span>Game Development</button>
       <button class="lens-btn" data-domain="teaching" style="--dot-color:var(--teaching)" aria-pressed="false"><span class="dot"></span>Teaching</button>
@@ -598,35 +627,260 @@
     <div class="section-head reveal">
       <p class="eyebrow">Selected work</p>
       <h2>Projects</h2>
+      <p style="color:var(--text-dim); margin-top:8px;">Filtered by the lens you pick above — switch domains to narrow the list.</p>
     </div>
-    <div class="project-grid reveal">
-      <div class="project-card" style="--card-color:var(--games)">
-        <div class="project-card-head">
-          <h3>Project RPG</h3>
-          <span class="years">2024 – Present</span>
+
+    <div class="project-group reveal" style="--group-color:var(--games)">
+      <p class="project-group-title"><span class="dot"></span>Gaming</p>
+      <div class="project-list" data-group="games">
+        <div class="project-item" data-domains="games">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">Spider-Man Swinging Mechanics</span><span class="project-year">2023</span></div>
+            <p class="project-desc">A web-swinging mechanic that attaches wires to real anchor points on buildings and objects, not a fixed point above the character.</p>
+          </div>
         </div>
-        <p>A multiplayer game built on DnD rules. One player acts as Dungeon Master, crafting the story and NPCs, while others create characters and play them in a shared world.</p>
+        <div class="project-item" data-domains="games">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">Adventure World</span><span class="project-year">2024 – Present</span></div>
+            <p class="project-desc">A DnD-style multiplayer game. One player is the Dungeon Master, crafting the story and NPCs, while others create characters and play them in a shared world.</p>
+          </div>
+        </div>
+        <div class="project-item" data-domains="games">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">Historic VR Experience</span><span class="project-year">NDA</span></div>
+            <p class="project-desc">A realistic VR experience under NDA, spanning four journeys: King Tut's tomb, the sunken cities of ancient Egypt, an imagined build of the pyramids, and the mummification process.</p>
+          </div>
+        </div>
+        <div class="project-item" data-domains="games">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">VLabSim</span></div>
+            <p class="project-desc">A Unity simulation modeling an engineering machine that cuts holes in steel.</p>
+          </div>
+        </div>
+        <div class="project-item" data-domains="games">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">Tech Arena</span></div>
+            <p class="project-desc">An online multiplayer game with six unique characters, each with distinct abilities and weapons — evolved from a 4-character split-screen version into a networked game.</p>
+          </div>
+        </div>
       </div>
-      <div class="project-card" style="--card-color:var(--games)">
-        <div class="project-card-head">
-          <h3>Spider-Man Swing Mechanic</h3>
-          <span class="years">2023</span>
+    </div>
+
+    <div class="project-group reveal" style="--group-color:var(--ai)">
+      <p class="project-group-title"><span class="dot"></span>Computer Vision</p>
+      <div class="project-list" data-group="cv">
+        <div class="project-item" data-domains="ai,cv">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">Dymmo — Facial Recognition System</span><span class="project-year">Graduation Project</span></div>
+            <p class="project-desc">A workplace-monitoring agent that identifies individuals, restricts permissions by zone, and alerts security over TCP/IP sockets when someone enters an unauthorized area.</p>
+          </div>
         </div>
-        <p>A web-swinging mechanic that attaches to real anchor points on buildings and objects, instead of a fixed point above the character, like the Spider-Man games.</p>
+        <div class="project-item" data-domains="ai,cv">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">Movie Poster Classifier</span></div>
+            <p class="project-desc">A PyTorch CNN predicting a movie's genres — plural and overlapping — from its poster image alone, with balanced multi-label training.</p>
+          </div>
+        </div>
+        <div class="project-item" data-domains="ai,cv">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">Video Captioning via Transformer-GAN</span><span class="project-year">Paper Implementation</span></div>
+            <p class="project-desc">An implementation of a transformer-based GAN approach to video captioning.</p>
+          </div>
+        </div>
+        <div class="project-item" data-domains="ai,cv">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">Center-Enhanced Video Captioning</span><span class="project-year">Paper Implementation</span></div>
+            <p class="project-desc">An implementation of a center-enhanced video captioning model with multimodal semantic alignment.</p>
+          </div>
+        </div>
+        <div class="project-item" data-domains="ai,cv">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">Vision-Text Bridging for Captioning</span><span class="project-year">Paper Implementation</span></div>
+            <p class="project-desc">An implementation of a method bridging vision and text for unsupervised, text-only captioning.</p>
+          </div>
+        </div>
       </div>
-      <div class="project-card" style="--card-color:var(--ai)">
-        <div class="project-card-head">
-          <h3>Eva AI</h3>
-          <span class="years">2022</span>
+    </div>
+
+    <div class="project-group reveal" style="--group-color:var(--aieng)">
+      <p class="project-group-title"><span class="dot"></span>AI Engineer</p>
+      <div class="project-list" data-group="aieng">
+        <div class="project-item" data-domains="ai,aieng">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">Virtual Assistant (Eva)</span></div>
+            <p class="project-desc">A background voice agent tracking daily, weekly, monthly, and custom events across profiles, with four escalating importance levels — from a 10-minute nudge to a day-before critical alert.</p>
+          </div>
         </div>
-        <p>An AI secretary agent and multi-profile appointment tracker with importance-based reminders, from a quiet nudge to critical day-before alerts.</p>
+        <div class="project-item" data-domains="ai,aieng">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">Eva AI</span></div>
+            <p class="project-desc">A Jarvis-inspired personal assistant: manages appointments, searches for information, opens programs, controls the computer, and solves math calculations.</p>
+          </div>
+        </div>
+        <div class="project-item" data-domains="ai,aieng">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">Chat Bot</span><span class="project-year">2021 – 2022</span></div>
+            <p class="project-desc">A conversational agent that searches the web, summarizes topics, plays YouTube videos, and reports the current date and time.</p>
+          </div>
+        </div>
+        <div class="project-item" data-domains="ai,aieng">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">CV Matcher</span></div>
+            <p class="project-desc">An NLP backend that scrapes text from PDFs and DOCX files and scores how well a CV matches a requirements document.</p>
+          </div>
+        </div>
+        <div class="project-item" data-domains="ai,aieng">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">ATS</span></div>
+            <p class="project-desc">An embedding- and LLM-based system that parses CVs and job descriptions, scoring and matching every section against a company's requirements.</p>
+          </div>
+        </div>
+        <div class="project-item" data-domains="ai,aieng">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">Chatbot Template</span></div>
+            <p class="project-desc">A modular, reusable Python framework for building chatbots — dialogue management, intent recognition, and pluggable NLP/ML models.</p>
+          </div>
+        </div>
+        <div class="project-item" data-domains="ai,aieng">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">NLPToolkit</span></div>
+            <p class="project-desc">A static C++ library for string manipulation — an NLTK-style toolkit for lightweight NLP tasks in C++.</p>
+          </div>
+        </div>
+        <div class="project-item" data-domains="ai,aieng">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">ChatAgent DB</span></div>
+            <p class="project-desc">A template chat agent that writes SQL to automate RAG-driven Q&amp;A and analysis over a database.</p>
+          </div>
+        </div>
+        <div class="project-item" data-domains="ai,aieng">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">Story Generation</span><span class="project-year">SELECT</span></div>
+            <p class="project-desc">Generates a children's story on a chosen topic, along with images and text, assembled into a comic-book PDF.</p>
+          </div>
+        </div>
+        <div class="project-item" data-domains="ai,aieng,games">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">Game Chatbot</span></div>
+            <p class="project-desc">An in-RPG chatbot with distinct personalities and context-aware responses for different in-game situations.</p>
+          </div>
+        </div>
+        <div class="project-item" data-domains="ai,aieng">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">Sales Agent</span><span class="project-year">In Development</span></div>
+            <p class="project-desc">Microservice-based automation for social-media sales agents.</p>
+          </div>
+        </div>
+        <div class="project-item" data-domains="ai,aieng">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">Summary Gen</span></div>
+            <p class="project-desc">Generates a markdown summary of a video's content directly from the video itself.</p>
+          </div>
+        </div>
       </div>
-      <div class="project-card" style="--card-color:var(--ai)">
-        <div class="project-card-head">
-          <h3>Chat Bot</h3>
-          <span class="years">2021 – 2022</span>
+    </div>
+
+    <div class="project-group reveal" style="--group-color:var(--ds)">
+      <p class="project-group-title"><span class="dot"></span>Data Science</p>
+      <div class="project-list" data-group="ds">
+        <div class="project-item" data-domains="ai,ds">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">City Predictor</span></div>
+            <p class="project-desc">A CUDA-accelerated C++ tool predicting a city's population from production and attraction values, built as an engineering graduation project.</p>
+          </div>
         </div>
-        <p>A conversational AI agent that searches the web, summarizes topics, plays YouTube videos, and reports the current date and time.</p>
+        <div class="project-item" data-domains="ai,ds">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">Angle-Based Outlier Detection</span></div>
+            <p class="project-desc">A packaged implementation of angle-based outlier detection for anomaly identification.</p>
+          </div>
+        </div>
+        <div class="project-item" data-domains="ai,ds">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">Paper Classifier</span></div>
+            <p class="project-desc">Predicts a research paper's genre directly from its abstract.</p>
+          </div>
+        </div>
+        <div class="project-item" data-domains="ai,ds">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">Xclusives Recommender</span><span class="project-year">SELECT</span></div>
+            <p class="project-desc">A hybrid collaborative- and content-based recommender for Xclusive's coupon and offers platform.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-group reveal" style="--group-color:var(--software)">
+      <p class="project-group-title"><span class="dot"></span>Software &amp; SaaS</p>
+      <div class="project-list" data-group="software">
+        <div class="project-item" data-domains="software">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">Knapsack</span></div>
+            <p class="project-desc">A Python implementation of the classic knapsack algorithm.</p>
+          </div>
+        </div>
+        <div class="project-item" data-domains="software">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">Ads App</span></div>
+            <p class="project-desc">A full-stack mobile app and backend where users post ad links — YouTube, Facebook, X, or websites — and earn exchangeable points for viewing others' content.</p>
+          </div>
+        </div>
+        <div class="project-item" data-domains="software">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">Distributed Systems Interface</span></div>
+            <p class="project-desc">A C++ interface for running distributed systems.</p>
+          </div>
+        </div>
+        <div class="project-item" data-domains="software">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">Graph Library</span></div>
+            <p class="project-desc">A small C++ library for handling graphs.</p>
+          </div>
+        </div>
+        <div class="project-item" data-domains="software">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">ERP</span><span class="project-year">Not in Production</span></div>
+            <p class="project-desc">A permission-based, AI-integrated business intelligence ERP focused on a simple UI and ease of use.</p>
+          </div>
+        </div>
+        <div class="project-item" data-domains="software">
+          <span class="item-dot"></span>
+          <div class="project-body">
+            <div class="project-title-row"><span class="project-title">Sehety</span></div>
+            <p class="project-desc">A self-hosted medical profile microservice application.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -695,8 +949,11 @@
 <script>
 (function(){
   var domains = {
-    all: "A full-stack technologist working across four disciplines: building <strong>AI systems</strong>, engineering <strong>full-stack software</strong>, developing <strong>games</strong>, and <strong>teaching</strong> the next generation of engineers.",
-    ai: "Architecting <strong>AI agents</strong> and <strong>RAG pipelines</strong> at SELECT, applying <strong>NLP</strong> and <strong>Computer Vision</strong> to real problems, and building <strong>generative AI</strong> systems end to end. Currently deepening this through an <strong>MSc in Computer Vision</strong>.",
+    all: "A technologist working across six lenses: <strong>Computer Vision</strong>, <strong>AI Engineering</strong>, <strong>Data Science</strong>, <strong>Software Engineering</strong>, <strong>Game Development</strong>, and <strong>Teaching</strong>.",
+    ai: "Combined AI work spanning <strong>Computer Vision</strong>, <strong>AI Engineering</strong>, and <strong>Data Science</strong> — pick one of the three lenses above for the specifics.",
+    cv: "Pursuing an <strong>MSc in Computer Vision</strong> while shipping it: facial recognition, video captioning models, and image classification — the visual half of AI.",
+    aieng: "Architecting <strong>AI agents</strong> and <strong>RAG pipelines</strong> at SELECT, applying <strong>NLP</strong> and <strong>generative AI</strong> to build assistants, chatbots, and automation systems end to end.",
+    ds: "Turning raw data into decisions — outlier detection, predictive modeling, and recommender systems built with <strong>Python</strong>, <strong>Pandas</strong>, and classical <strong>Machine Learning</strong>.",
     software: "Full-stack engineering across the whole delivery chain — <strong>Angular/TypeScript</strong> front ends, <strong>Node/Express</strong> back ends, relational data layers, and the <strong>SOLID principles</strong> and <strong>multithreading</strong> know-how that keep it fast and maintainable.",
     games: "6+ years shaping interactive experiences in <strong>Unreal</strong> and <strong>Unity</strong> — rendering pipelines, <strong>shader development</strong>, <strong>VR</strong>, behavior trees, and 3D asset pipelines in <strong>Blender</strong>.",
     teaching: "Three years as a <strong>Teaching Assistant</strong> at Ain Shams University, running labs and tutorials and helping students build real intuition for AI and computer science fundamentals."
@@ -712,15 +969,15 @@
   ];
 
   var chips = [
-    {name:"Python", domains:["ai","software"]},
-    {name:"PyTorch", domains:["ai"]},
-    {name:"LangChain", domains:["ai"]},
-    {name:"LangGraph", domains:["ai"]},
-    {name:"Transformers", domains:["ai"]},
-    {name:"OpenCV", domains:["ai"]},
-    {name:"Pandas", domains:["ai"]},
-    {name:"n8n", domains:["ai","software"]},
-    {name:"SQL / ORMs", domains:["software"]},
+    {name:"Python", domains:["ai","cv","aieng","ds","software"]},
+    {name:"PyTorch", domains:["ai","cv","aieng"]},
+    {name:"LangChain", domains:["ai","aieng"]},
+    {name:"LangGraph", domains:["ai","aieng"]},
+    {name:"Transformers", domains:["ai","cv","aieng"]},
+    {name:"OpenCV", domains:["ai","cv"]},
+    {name:"Pandas", domains:["ai","ds"]},
+    {name:"n8n", domains:["ai","aieng","software"]},
+    {name:"SQL / ORMs", domains:["software","ds"]},
     {name:"Angular", domains:["software"]},
     {name:"Node.js / Express", domains:["software"]},
     {name:"TypeScript", domains:["software"]},
@@ -735,11 +992,11 @@
     {name:"Unreal Engine", domains:["games"]},
     {name:"Blender", domains:["games"]},
     {name:"SOLID & Design Patterns", domains:["software"]},
-    {name:"Deep Learning", domains:["ai"]},
-    {name:"Machine Learning", domains:["ai"]},
-    {name:"Generative AI", domains:["ai"]},
-    {name:"RAG Pipelines", domains:["ai"]},
-    {name:"NLP", domains:["ai"]},
+    {name:"Deep Learning", domains:["ai","cv","aieng"]},
+    {name:"Machine Learning", domains:["ai","ds","cv"]},
+    {name:"Generative AI", domains:["ai","aieng"]},
+    {name:"RAG Pipelines", domains:["ai","aieng"]},
+    {name:"NLP", domains:["ai","aieng"]},
     {name:"Shader Development", domains:["games"]},
     {name:"VR Development", domains:["games"]},
     {name:"State Machines", domains:["games"]},
@@ -748,7 +1005,7 @@
     {name:"Performance Optimization", domains:["software","games"]}
   ];
 
-  var colorMap = {ai:"var(--ai)", software:"var(--software)", games:"var(--games)", teaching:"var(--teaching)"};
+  var colorMap = {ai:"var(--ai)", cv:"var(--ai)", aieng:"var(--aieng)", ds:"var(--ds)", software:"var(--software)", games:"var(--games)", teaching:"var(--teaching)"};
 
   var chipGrid = document.getElementById("chipGrid");
   chips.forEach(function(c){
@@ -792,6 +1049,16 @@
         b.style.opacity = "0.88";
       } else {
         b.style.opacity = "0.25";
+      }
+    });
+
+    var projectItems = document.querySelectorAll(".project-item");
+    projectItems.forEach(function(item){
+      var itemDomains = item.dataset.domains.split(",");
+      if(domain === "all" || itemDomains.indexOf(domain) !== -1){
+        item.classList.remove("dimmed");
+      } else {
+        item.classList.add("dimmed");
       }
     });
 
