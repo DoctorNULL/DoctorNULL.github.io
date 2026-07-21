@@ -1,47 +1,840 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohamed Mostafa</title>
-    <link rel="stylesheet" href="./assets/utils/all.min.css">
-    <link rel="stylesheet" href="./assets/utils/bootstrap.min.css">
-    <link rel="stylesheet" href="./main.css">
-    <script src="./assets/utils/all.min.js"></script>
-    <script src="./assets/utils/bootstrap.min.css"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohamed Mostafa — AI Engineer, Software Engineer, Game Developer</title>
+<meta name="description" content="Mohamed Mostafa — AI Engineer, Software Engineer, Game Developer, and Teaching Assistant. MSc Computer Vision candidate with 6+ years in game development.">
+<meta property="og:title" content="Mohamed Mostafa">
+<meta property="og:description" content="AI Engineer & Data Scientist · Software Engineer · Game Developer · Teaching Assistant">
+<meta property="og:image" content="assets/imgs/Profile.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#12161C;
+    --bg-elevated:#1B212B;
+    --bg-elevated-2:#212836;
+    --text:#EDEAE3;
+    --text-dim:#8A93A0;
+    --line:#2A3140;
+
+    --ai:#E8A33D;      /* AI / Computer Vision — lens & light */
+    --software:#3EC6B3;/* Software Engineering — signal/teal */
+    --games:#8C7AE6;   /* Game Development — violet */
+    --teaching:#E0637D;/* Teaching — rose */
+
+    --accent: var(--ai);
+
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'IBM Plex Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--accent); color:#12161C; }
+
+  a{ color:inherit; }
+  img,svg{ display:block; max-width:100%; }
+
+  :focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+    border-radius:2px;
+  }
+
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    backdrop-filter:blur(10px);
+    background:rgba(18,22,28,0.82);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1080px;
+    margin:0 auto;
+    padding:16px 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:1.05rem;
+    letter-spacing:0.01em;
+    text-decoration:none;
+  }
+  .brand svg{ width:26px; height:26px; }
+  nav.links{ display:flex; gap:28px; }
+  nav.links a{
+    font-family:var(--font-mono);
+    font-size:0.8rem;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:var(--text-dim);
+    transition:color .2s ease;
+  }
+  nav.links a:hover{ color:var(--text); }
+  @media (max-width:720px){
+    nav.links{ display:none; }
+  }
+
+  /* ---------- HERO ---------- */
+  section.hero{
+    padding:96px 0 72px;
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:48px;
+    align-items:center;
+  }
+  @media (max-width:860px){
+    section.hero{ grid-template-columns:1fr; padding:56px 0 40px; text-align:center; }
+    .hero-aperture{ order:-1; margin:0 auto 8px; }
+  }
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:0.8rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 18px;
+    transition:color .3s ease;
+  }
+  h1.name{
+    font-family:var(--font-display);
+    font-size:clamp(2.4rem, 5vw, 3.6rem);
+    line-height:1.05;
+    margin:0 0 18px;
+    font-weight:700;
+  }
+  p.role-line{
+    font-family:var(--font-mono);
+    font-size:1rem;
+    color:var(--text-dim);
+    margin:0 0 24px;
+    min-height:1.6em;
+  }
+  p.role-line .cursor{ color:var(--accent); }
+  p.summary{
+    max-width:52ch;
+    color:var(--text-dim);
+    font-size:1.02rem;
+    margin:0 0 32px;
+  }
+  @media (max-width:860px){ p.summary{ margin-left:auto; margin-right:auto; } }
+
+  .cta-row{ display:flex; gap:14px; flex-wrap:wrap; }
+  @media (max-width:860px){ .cta-row{ justify-content:center; } }
+  .btn{
+    font-family:var(--font-mono);
+    font-size:0.85rem;
+    letter-spacing:0.03em;
+    text-decoration:none;
+    padding:12px 20px;
+    border-radius:6px;
+    border:1px solid var(--line);
+    transition:border-color .2s ease, transform .2s ease, background .2s ease;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+  .btn.primary{
+    background:var(--accent);
+    color:#12161C;
+    border-color:var(--accent);
+    font-weight:600;
+  }
+  .btn.primary:hover{ transform:translateY(-2px); }
+  .btn.ghost:hover{ border-color:var(--accent); color:var(--accent); transform:translateY(-2px); }
+
+  .hero-aperture{ display:flex; justify-content:center; }
+  #aperture{ width:min(320px, 80vw); height:auto; }
+  .blade{
+    transform-origin:160px 160px;
+    transition:opacity .35s ease, filter .35s ease;
+    cursor:pointer;
+  }
+  .blade:hover{ filter:brightness(1.2); }
+  @media (prefers-reduced-motion:no-preference){
+    .blade{ animation:bladeIn .9s cubic-bezier(.2,.9,.25,1) backwards; }
+    .blade.b1{ animation-delay:.05s; }
+    .blade.b2{ animation-delay:.15s; }
+    .blade.b3{ animation-delay:.25s; }
+    .blade.b4{ animation-delay:.35s; }
+  }
+  @keyframes bladeIn{
+    from{ opacity:0; transform:scale(.55) rotate(-24deg); }
+    to{ opacity:1; transform:scale(1) rotate(0deg); }
+  }
+
+  /* ---------- SECTION HEADERS ---------- */
+  section{ padding:64px 0; border-top:1px solid var(--line); }
+  section.hero{ border-top:none; }
+  .section-head{ margin-bottom:36px; }
+  .section-head .eyebrow{ margin-bottom:8px; }
+  h2{
+    font-family:var(--font-display);
+    font-size:clamp(1.5rem, 3vw, 2rem);
+    margin:0;
+    font-weight:600;
+  }
+  .reveal{
+    opacity:0;
+    transform:translateY(18px);
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  .reveal.visible{ opacity:1; transform:none; }
+
+  /* ---------- DOMAIN SELECTOR ---------- */
+  .lens-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:12px;
+    margin-bottom:32px;
+  }
+  @media (max-width:720px){ .lens-grid{ grid-template-columns:repeat(2, 1fr); } }
+  .lens-btn{
+    font-family:var(--font-mono);
+    font-size:0.82rem;
+    letter-spacing:0.02em;
+    background:var(--bg-elevated);
+    border:1px solid var(--line);
+    color:var(--text-dim);
+    padding:14px 12px;
+    border-radius:8px;
+    cursor:pointer;
+    text-align:left;
+    transition:border-color .2s ease, color .2s ease, background .2s ease;
+  }
+  .lens-btn .dot{
+    width:8px; height:8px; border-radius:50%;
+    display:inline-block; margin-right:8px;
+    background:var(--dot-color, var(--text-dim));
+  }
+  .lens-btn[aria-pressed="true"]{
+    color:var(--text);
+    border-color:var(--dot-color);
+    background:var(--bg-elevated-2);
+  }
+  .lens-btn:hover{ color:var(--text); }
+
+  .lens-panel{
+    background:var(--bg-elevated);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:28px 30px;
+    font-size:1.02rem;
+    color:var(--text-dim);
+    min-height:96px;
+    transition:border-color .3s ease;
+  }
+  .lens-panel strong{ color:var(--text); }
+
+  /* ---------- STACK CHIPS ---------- */
+  .chip-grid{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:28px;
+  }
+  .chip{
+    font-family:var(--font-mono);
+    font-size:0.8rem;
+    padding:8px 14px;
+    border-radius:20px;
+    border:1px solid var(--line);
+    color:var(--text-dim);
+    background:var(--bg-elevated);
+    transition:opacity .3s ease, border-color .3s ease, color .3s ease;
+  }
+  .chip.active{
+    color:var(--text);
+    border-color:var(--chip-color, var(--accent));
+  }
+  .chip.dimmed{ opacity:0.28; }
+
+  /* ---------- EXPERIENCE ---------- */
+  .exp-grid{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+  }
+  .exp-card{
+    background:var(--bg-elevated);
+    border:1px solid var(--line);
+    border-left:3px solid var(--card-color, var(--accent));
+    border-radius:10px;
+    padding:22px 26px;
+  }
+  .exp-card-head{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:8px 20px;
+    margin-bottom:4px;
+  }
+  .exp-card h3{
+    font-family:var(--font-display);
+    font-size:1.1rem;
+    margin:0;
+    font-weight:600;
+  }
+  .exp-card .dates{
+    font-family:var(--font-mono);
+    font-size:0.76rem;
+    color:var(--text-dim);
+    white-space:nowrap;
+  }
+  .exp-card .org{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    color:var(--card-color, var(--accent));
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    margin:0 0 12px;
+  }
+  .exp-card p{ margin:0; color:var(--text-dim); font-size:0.95rem; }
+  .exp-bullets{
+    margin:10px 0 0;
+    padding-left:18px;
+    color:var(--text-dim);
+    font-size:0.93rem;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  .exp-bullets li::marker{ color:var(--card-color, var(--accent)); }
+
+  /* ---------- PROJECTS ---------- */
+  .project-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:16px;
+  }
+  @media (max-width:720px){ .project-grid{ grid-template-columns:1fr; } }
+  .project-card{
+    background:var(--bg-elevated);
+    border:1px solid var(--line);
+    border-top:3px solid var(--card-color, var(--accent));
+    border-radius:10px;
+    padding:22px 24px;
+  }
+  .project-card-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:12px;
+    margin-bottom:8px;
+  }
+  .project-card h3{
+    font-family:var(--font-display);
+    font-size:1.02rem;
+    margin:0;
+    font-weight:600;
+  }
+  .project-card .years{
+    font-family:var(--font-mono);
+    font-size:0.75rem;
+    color:var(--text-dim);
+    white-space:nowrap;
+  }
+  .project-card p{ margin:0; color:var(--text-dim); font-size:0.92rem; }
+
+  .stat-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    margin-top:28px;
+  }
+  .stat{
+    font-family:var(--font-mono);
+    font-size:0.8rem;
+    color:var(--text-dim);
+    background:var(--bg-elevated);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:10px 14px;
+  }
+  .stat b{ color:var(--text); font-family:var(--font-display); font-size:1rem; }
+
+  /* ---------- EDUCATION ---------- */
+  .edu-card{
+    background:var(--bg-elevated);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:26px 28px;
+    display:flex;
+    gap:20px;
+    align-items:flex-start;
+  }
+  .edu-card svg{ flex-shrink:0; width:38px; height:38px; margin-top:4px; }
+  .edu-card h3{ font-family:var(--font-display); margin:0 0 6px; font-size:1.1rem; }
+  .edu-card p{ margin:0; color:var(--text-dim); }
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:14px;
+  }
+  @media (max-width:720px){ .contact-grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:460px){ .contact-grid{ grid-template-columns:1fr; } }
+  .contact-card{
+    background:var(--bg-elevated);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:18px 20px;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  .contact-card:hover{ border-color:var(--accent); transform:translateY(-2px); }
+  .contact-card svg{ width:20px; height:20px; flex-shrink:0; color:var(--accent); }
+  .contact-card span{ font-family:var(--font-mono); font-size:0.85rem; }
+
+  footer{
+    text-align:center;
+    padding:40px 0 56px;
+    color:var(--text-dim);
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+  }
+</style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg">
-        <a class="navbar-brand logo" href="https://github.com/DoctorNULL">DoctorNULL</a>
-        <button class="navbar-toggler" data-target="#navigation" data-toggle="collapse" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div id="navigation" class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto d-flex justify-content-end w-100">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Welcome <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Work</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
 
-    <section>
-        <div class="main-welcome d-flex justify-content-around m-5">
-            <div class="Welcome-text">
-                <h1>
-                    Hi all, I'm Mohamed Mostafa
-                </h1>
-                <p>
-                    A passionate Software Developer 🚀 Teaching Assistant, Game Developer and Data scientist.
-                </p>
-            </div>
-            <div class="Welcome-img ">
-                <img src="./assets/imgs/Profile.jpg" />
-            </div>
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">
+      <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="15" stroke="var(--accent)" stroke-width="1.5"/><path d="M16 6 L23 16 L16 26 L9 16 Z" fill="var(--accent)" opacity="0.85"/></svg>
+      Mohamed Mostafa
+    </a>
+    <nav class="links">
+      <a href="#domains">Domains</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div>
+      <p class="eyebrow" id="eyebrow">Computer Vision · Full-Stack · Game Dev · Education</p>
+      <h1 class="name">Mohamed Mostafa</h1>
+      <p class="role-line" id="roleLine">AI Engineer &amp; Data Scientist<span class="cursor">_</span></p>
+      <p class="summary">I work across four disciplines that don't usually share a desk: building AI systems (LLM agents, RAG pipelines, generative AI), engineering full-stack software, developing games with Unreal and Unity (shaders, VR, gameplay systems), and teaching the engineers who'll do the same. Currently pursuing an MSc in Computer Vision.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="https://github.com/DoctorNULL?tab=repositories" target="_blank" rel="noreferrer">View my work →</a>
+        <a class="btn ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+    <div class="hero-aperture">
+      <svg id="aperture" viewBox="0 0 320 320">
+        <circle cx="160" cy="160" r="152" fill="none" stroke="var(--line)" stroke-width="1"/>
+        <g class="blade b1" data-domain="ai" style="--dot-color:var(--ai)">
+          <path d="M160 160 L160 24 A136 136 0 0 1 262 92 Z" fill="var(--ai)" opacity="0.88"/>
+        </g>
+        <g class="blade b2" data-domain="software" style="--dot-color:var(--software)">
+          <path d="M160 160 L262 92 A136 136 0 0 1 228 262 Z" fill="var(--software)" opacity="0.88"/>
+        </g>
+        <g class="blade b3" data-domain="games" style="--dot-color:var(--games)">
+          <path d="M160 160 L228 262 A136 136 0 0 1 92 262 Z" fill="var(--games)" opacity="0.88"/>
+        </g>
+        <g class="blade b4" data-domain="teaching" style="--dot-color:var(--teaching)">
+          <path d="M160 160 L92 262 A136 136 0 0 1 160 24 Z" fill="var(--teaching)" opacity="0.88"/>
+        </g>
+        <defs>
+          <clipPath id="photoClip">
+            <circle cx="160" cy="160" r="46"/>
+          </clipPath>
+        </defs>
+        <circle cx="160" cy="160" r="48" fill="var(--bg)"/>
+        <image href="assets/imgs/Profile.jpg" x="114" y="114" width="92" height="92" clip-path="url(#photoClip)" preserveAspectRatio="xMidYMid slice"/>
+        <circle cx="160" cy="160" r="46" fill="none" stroke="var(--line)" stroke-width="1.5"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- DOMAIN SELECTOR -->
+  <section id="domains">
+    <div class="section-head reveal">
+      <p class="eyebrow">Four lenses</p>
+      <h2>Pick a discipline to look through</h2>
+    </div>
+    <div class="lens-grid reveal">
+      <button class="lens-btn" data-domain="all" style="--dot-color:var(--text-dim)" aria-pressed="true"><span class="dot"></span>All disciplines</button>
+      <button class="lens-btn" data-domain="ai" style="--dot-color:var(--ai)" aria-pressed="false"><span class="dot"></span>AI &amp; Computer Vision</button>
+      <button class="lens-btn" data-domain="software" style="--dot-color:var(--software)" aria-pressed="false"><span class="dot"></span>Software Engineering</button>
+      <button class="lens-btn" data-domain="games" style="--dot-color:var(--games)" aria-pressed="false"><span class="dot"></span>Game Development</button>
+      <button class="lens-btn" data-domain="teaching" style="--dot-color:var(--teaching)" aria-pressed="false"><span class="dot"></span>Teaching</button>
+    </div>
+    <div class="lens-panel reveal" id="lensPanel">
+      A full-stack technologist working across four disciplines: building <strong>AI systems</strong>, engineering <strong>full-stack software</strong>, developing <strong>games</strong>, and <strong>teaching</strong> the next generation of engineers.
+    </div>
+
+    <div id="stack" class="reveal" style="margin-top:56px;">
+      <p class="eyebrow">Tech stack</p>
+      <h2 style="margin-bottom:6px;">What I build with</h2>
+      <p style="color:var(--text-dim); margin-top:8px;">Chips dim or light up depending on the lens selected above.</p>
+      <div class="chip-grid" id="chipGrid"></div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-head reveal">
+      <p class="eyebrow">Career</p>
+      <h2>Where I've worked</h2>
+    </div>
+    <div class="exp-grid reveal">
+      <div class="exp-card" style="--card-color:var(--ai)">
+        <div class="exp-card-head">
+          <h3>AI Engineer</h3>
+          <span class="dates">09/2025 – Present</span>
         </div>
-    </section>
+        <p class="org">SELECT · Cairo, Egypt</p>
+        <ul class="exp-bullets">
+          <li>Architect and deploy AI agents that automate complex human workflows at scale.</li>
+          <li>Design and optimize Machine Learning and Deep Learning models for domain-specific challenges.</li>
+          <li>Build generative AI systems and Retrieval-Augmented Generation (RAG) pipelines for decision-making and automation.</li>
+          <li>Apply NLP and Computer Vision techniques to language, image, and video problems.</li>
+          <li>Lead and mentor AI teams, shaping technical strategy end to end.</li>
+        </ul>
+      </div>
+
+      <div class="exp-card" style="--card-color:var(--games)">
+        <div class="exp-card-head">
+          <h3>Digital Solution Engineer &amp; Game Developer</h3>
+          <span class="dates">Present</span>
+        </div>
+        <p class="org">Digital Sphere Solutions</p>
+        <p>Interactive digital solutions built with Unity and Unreal Engine.</p>
+      </div>
+
+      <div class="exp-card" style="--card-color:var(--teaching)">
+        <div class="exp-card-head">
+          <h3>Teaching Assistant</h3>
+          <span class="dates">06/2023 – Present</span>
+        </div>
+        <p class="org">Ain Shams University · Cairo, Egypt</p>
+        <ul class="exp-bullets">
+          <li>Lead laboratory sessions and tutorials, delivering structured instruction.</li>
+          <li>Guide students through practical exercises with hands-on assistance and feedback.</li>
+          <li>Evaluate assignments, projects, and examinations with academic integrity.</li>
+          <li>Deliver training sessions to build student proficiency and course readiness.</li>
+        </ul>
+      </div>
+
+      <div class="exp-card" style="--card-color:var(--games)">
+        <div class="exp-card-head">
+          <h3>Software Engineer</h3>
+          <span class="dates">01/2023 – 01/2024</span>
+        </div>
+        <p class="org">SistroAS · Cairo, Egypt</p>
+        <ul class="exp-bullets">
+          <li>Built immersive virtual worlds with high-performance, real-time rendering pipelines.</li>
+          <li>Engineered gameplay mechanics using design patterns, physics, and AI systems.</li>
+          <li>Produced motion graphics and cinematic sequences with art and design teams.</li>
+          <li>Developed realistic shaders and material systems for lifelike environments.</li>
+          <li>Built NPC behaviors using state machines, behavior trees, and pathfinding.</li>
+        </ul>
+      </div>
+
+      <div class="exp-card" style="--card-color:var(--software)">
+        <div class="exp-card-head">
+          <h3>Freelance Software Engineer</h3>
+          <span class="dates">2019 – Present</span>
+        </div>
+        <p class="org">Self-Employed</p>
+        <ul class="exp-bullets">
+          <li>Electrochemical machine simulation with interactive computational visualization.</li>
+          <li>Windows-based file monitoring system with real-time change detection and alerts.</li>
+          <li>C# security monitoring solution with ID and barcode recognition for access control.</li>
+          <li>Full-stack platform connecting clients with freelancers, including secure transactions.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="stat-row reveal">
+      <div class="stat"><b>6+ yrs</b> Game Development</div>
+      <div class="stat"><b>5+ yrs</b> AI &amp; Machine Learning</div>
+      <div class="stat"><b>3+ yrs</b> Software Engineering</div>
+      <div class="stat"><b>3 yrs</b> Teaching</div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-head reveal">
+      <p class="eyebrow">Selected work</p>
+      <h2>Projects</h2>
+    </div>
+    <div class="project-grid reveal">
+      <div class="project-card" style="--card-color:var(--games)">
+        <div class="project-card-head">
+          <h3>Project RPG</h3>
+          <span class="years">2024 – Present</span>
+        </div>
+        <p>A multiplayer game built on DnD rules. One player acts as Dungeon Master, crafting the story and NPCs, while others create characters and play them in a shared world.</p>
+      </div>
+      <div class="project-card" style="--card-color:var(--games)">
+        <div class="project-card-head">
+          <h3>Spider-Man Swing Mechanic</h3>
+          <span class="years">2023</span>
+        </div>
+        <p>A web-swinging mechanic that attaches to real anchor points on buildings and objects, instead of a fixed point above the character, like the Spider-Man games.</p>
+      </div>
+      <div class="project-card" style="--card-color:var(--ai)">
+        <div class="project-card-head">
+          <h3>Eva AI</h3>
+          <span class="years">2022</span>
+        </div>
+        <p>An AI secretary agent and multi-profile appointment tracker with importance-based reminders, from a quiet nudge to critical day-before alerts.</p>
+      </div>
+      <div class="project-card" style="--card-color:var(--ai)">
+        <div class="project-card-head">
+          <h3>Chat Bot</h3>
+          <span class="years">2021 – 2022</span>
+        </div>
+        <p>A conversational AI agent that searches the web, summarizes topics, plays YouTube videos, and reports the current date and time.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-head reveal">
+      <p class="eyebrow">Academic</p>
+      <h2>Education</h2>
+    </div>
+    <div class="edu-card reveal" style="margin-bottom:14px;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--ai)" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.4"/></svg>
+      <div>
+        <h3>MSc in Computer Vision — in progress</h3>
+        <p>Ain Shams University · 2024 – Present · Cairo, Egypt</p>
+      </div>
+    </div>
+    <div class="edu-card reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--software)" stroke-width="1.6"><path d="M3 8 12 4l9 4-9 4-9-4Z"/><path d="M6 10.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-5.5"/></svg>
+      <div>
+        <h3>BSc in Computer Science</h3>
+        <p>Ain Shams University · 2017 – 2021 · Cairo, Egypt</p>
+      </div>
+    </div>
+    <p class="reveal" style="color:var(--text-dim); font-family:var(--font-mono); font-size:0.85rem; margin-top:20px;">Languages: Arabic (native) · English</p>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-head reveal">
+      <p class="eyebrow">Reach out</p>
+      <h2>Let's talk</h2>
+    </div>
+    <div class="contact-grid reveal">
+      <a class="contact-card" href="mailto:mohamed.01061@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+        <span>mohamed.01061@gmail.com</span>
+      </a>
+      <a class="contact-card" href="https://www.linkedin.com/in/doctornull/" target="_blank" rel="noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10v7M7 7v.01M12 17v-4.5a2 2 0 0 1 4 0V17"/></svg>
+        <span>LinkedIn</span>
+      </a>
+      <a class="contact-card" href="https://github.com/DoctorNULL?tab=repositories" target="_blank" rel="noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.53 9.53 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+        <span>GitHub</span>
+      </a>
+      <a class="contact-card" href="https://fb.com/eng.mido55/" target="_blank" rel="noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 9h3V6h-3a3 3 0 0 0-3 3v2H8v3h3v6h3v-6h3l1-3h-4V9a1 1 0 0 1 1-1Z"/></svg>
+        <span>Facebook</span>
+      </a>
+      <a class="contact-card" href="https://medium.com/@mohamed.01061" target="_blank" rel="noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6" cy="12" r="3.2"/><ellipse cx="15" cy="12" rx="2" ry="3.2"/><ellipse cx="20.2" cy="12" rx="0.9" ry="3.2"/></svg>
+        <span>Medium</span>
+      </a>
+      <a class="contact-card" href="mailto:mohamedmostafa@sci.asu.edu.eg">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2 3 7l9 5 9-5-9-5Z"/><path d="M3 7v10l9 5 9-5V7"/></svg>
+        <span>University Email</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>Mohamed Mostafa — built with plain HTML, CSS, and JS. No frameworks were harmed in the making of this page.</footer>
+
+<script>
+(function(){
+  var domains = {
+    all: "A full-stack technologist working across four disciplines: building <strong>AI systems</strong>, engineering <strong>full-stack software</strong>, developing <strong>games</strong>, and <strong>teaching</strong> the next generation of engineers.",
+    ai: "Architecting <strong>AI agents</strong> and <strong>RAG pipelines</strong> at SELECT, applying <strong>NLP</strong> and <strong>Computer Vision</strong> to real problems, and building <strong>generative AI</strong> systems end to end. Currently deepening this through an <strong>MSc in Computer Vision</strong>.",
+    software: "Full-stack engineering across the whole delivery chain — <strong>Angular/TypeScript</strong> front ends, <strong>Node/Express</strong> back ends, relational data layers, and the <strong>SOLID principles</strong> and <strong>multithreading</strong> know-how that keep it fast and maintainable.",
+    games: "6+ years shaping interactive experiences in <strong>Unreal</strong> and <strong>Unity</strong> — rendering pipelines, <strong>shader development</strong>, <strong>VR</strong>, behavior trees, and 3D asset pipelines in <strong>Blender</strong>.",
+    teaching: "Three years as a <strong>Teaching Assistant</strong> at Ain Shams University, running labs and tutorials and helping students build real intuition for AI and computer science fundamentals."
+  };
+
+  var roles = [
+    "AI Engineer",
+    "Software Engineer",
+    "Game Developer",
+    "Teaching Assistant",
+    "Solution Designer",
+    "MSc Computer Vision Candidate"
+  ];
+
+  var chips = [
+    {name:"Python", domains:["ai","software"]},
+    {name:"PyTorch", domains:["ai"]},
+    {name:"LangChain", domains:["ai"]},
+    {name:"LangGraph", domains:["ai"]},
+    {name:"Transformers", domains:["ai"]},
+    {name:"OpenCV", domains:["ai"]},
+    {name:"Pandas", domains:["ai"]},
+    {name:"n8n", domains:["ai","software"]},
+    {name:"SQL / ORMs", domains:["software"]},
+    {name:"Angular", domains:["software"]},
+    {name:"Node.js / Express", domains:["software"]},
+    {name:"TypeScript", domains:["software"]},
+    {name:"Tailwind / Bootstrap", domains:["software"]},
+    {name:"Prisma", domains:["software"]},
+    {name:"C#", domains:["software","games"]},
+    {name:"C++", domains:["software","games"]},
+    {name:"Java", domains:["software"]},
+    {name:".NET / WinForms", domains:["software"]},
+    {name:"Flutter", domains:["software"]},
+    {name:"Unity", domains:["games"]},
+    {name:"Unreal Engine", domains:["games"]},
+    {name:"Blender", domains:["games"]},
+    {name:"SOLID & Design Patterns", domains:["software"]},
+    {name:"Deep Learning", domains:["ai"]},
+    {name:"Machine Learning", domains:["ai"]},
+    {name:"Generative AI", domains:["ai"]},
+    {name:"RAG Pipelines", domains:["ai"]},
+    {name:"NLP", domains:["ai"]},
+    {name:"Shader Development", domains:["games"]},
+    {name:"VR Development", domains:["games"]},
+    {name:"State Machines", domains:["games"]},
+    {name:"Behavior Trees", domains:["games"]},
+    {name:"Multithreading", domains:["software","games"]},
+    {name:"Performance Optimization", domains:["software","games"]}
+  ];
+
+  var colorMap = {ai:"var(--ai)", software:"var(--software)", games:"var(--games)", teaching:"var(--teaching)"};
+
+  var chipGrid = document.getElementById("chipGrid");
+  chips.forEach(function(c){
+    var el = document.createElement("span");
+    el.className = "chip";
+    el.textContent = c.name;
+    el.dataset.domains = c.domains.join(",");
+    chipGrid.appendChild(el);
+  });
+
+  var lensButtons = document.querySelectorAll(".lens-btn");
+  var panel = document.getElementById("lensPanel");
+  var blades = document.querySelectorAll(".blade");
+
+  function setDomain(domain){
+    lensButtons.forEach(function(btn){
+      btn.setAttribute("aria-pressed", btn.dataset.domain === domain ? "true" : "false");
+    });
+    panel.innerHTML = domains[domain] || domains.all;
+    panel.style.borderColor = domain === "all" ? "var(--line)" : colorMap[domain];
+
+    var chipEls = document.querySelectorAll(".chip");
+    chipEls.forEach(function(chip){
+      var chipDomains = chip.dataset.domains.split(",");
+      if(domain === "all"){
+        chip.classList.remove("dimmed");
+        chip.classList.remove("active");
+        chip.style.removeProperty("--chip-color");
+      } else if(chipDomains.indexOf(domain) !== -1){
+        chip.classList.remove("dimmed");
+        chip.classList.add("active");
+        chip.style.setProperty("--chip-color", colorMap[domain]);
+      } else {
+        chip.classList.add("dimmed");
+        chip.classList.remove("active");
+      }
+    });
+
+    blades.forEach(function(b){
+      if(domain === "all" || b.dataset.domain === domain){
+        b.style.opacity = "0.88";
+      } else {
+        b.style.opacity = "0.25";
+      }
+    });
+
+    document.documentElement.style.setProperty("--accent", domain === "all" ? "var(--ai)" : colorMap[domain]);
+  }
+
+  lensButtons.forEach(function(btn){
+    btn.addEventListener("click", function(){ setDomain(btn.dataset.domain); });
+  });
+  blades.forEach(function(b){
+    b.addEventListener("click", function(){ setDomain(b.dataset.domain); });
+  });
+
+  setDomain("all");
+
+  // Role ticker
+  var roleLine = document.getElementById("roleLine");
+  var idx = 0;
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(!reduceMotion){
+    setInterval(function(){
+      idx = (idx + 1) % roles.length;
+      roleLine.innerHTML = roles[idx] + '<span class="cursor">_</span>';
+    }, 2600);
+  }
+
+  // Scroll reveal
+  var revealEls = document.querySelectorAll(".reveal");
+  if("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add("visible");
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.12});
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add("visible"); });
+  }
+})();
+</script>
+
 </body>
 </html>
